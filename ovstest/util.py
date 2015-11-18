@@ -204,10 +204,13 @@ def get_datagram_sizes(mtu1, mtu2):
     """
     This function calculates all the "interesting" datagram sizes so that
     we test both - receive and send side with different packets sizes.
+    VXLAN Datagram Size: 78 => 1422
+    GENEVE Datagram Size: 78 => 1422
+    GRE Datagram Size: 66 => 1434
     """
-    s1 = set([1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, mtu1 - 100, mtu1 - 28, mtu1, 2048])
-    s2 = set([1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, mtu2 - 100, mtu2 - 28, mtu2, 2048])
-    #s2 = set([8, mtu2 - 100, mtu2 - 28, mtu2])
+    s1 = set([1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 1400, 1422, 1434, 1472, mtu1, 2048])
+    s2 = set([1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 1400, 1422, 1434, 1472, mtu2, 2048])
+
     return sorted(s1.union(s2))
 
 
